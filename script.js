@@ -1,37 +1,69 @@
-const numberButtons = document.querySelectorAll("[data-number]")
-const operationButtons = document.querySelectorAll("[data-operator]")
-const equalsButton = document.querySelectorAll("[data-equals]")
-const deleterButton = document.querySelectorAll("[data-delete]")
-const allClearButton = document.querySelectorAll("[data-all-clear-button]")
-const previousOperand = document.querySelectorAll("[data-previous-operand]")
-const currentOperandTextElement = document.querySelectorAll("[data-current-operand]");
+const numberButtons = document.querySelectorAll("[data-number]");
+const operationButtons = document.querySelectorAll("[data-operator]");
+const equalsButton = document.querySelector("[data-equals]");
+const deleteButton = document.querySelector("[data-delete]");
+const allClearButton = document.querySelector("[data-all-clear-button]");
+const previousOperandTextElement = document.querySelector("[data-previous-operand]");
+const currentOperandTextElement = document.querySelector("[data-current-operand]");
 
-class Calculador {
-  constructor( previousOperandtextElement, currentOperandTextElement) { 
-      this.previousOperandtextElement = previousOperandtextElement;
-      this.currentOperandtextElement = previousOperandtextElement;
+class Calculator {
+  constructor( previousOperandTextElement, currentOperandTextElement) { 
+      this.previousOperandTextElement = previousOperandTextElement;
+      this.currentOperandTextElement = currentOperandTextElement;
+      this.clear();
     }
-    
-    clear(){
-      this.currentOperand ="";
-      this.previousOperand ="";
+
+    chooseOperation(operation){
+      this.operation = operation;
+      this.previousOperand = this.currentOperand;
+      this.currentOperand = "";
+    }
+
+    appendNumber(number) {
+      if(this.currentOperand.includes('.') && number === ".") return;
+
+      this.currentOperand = '${this.currentOperand}${number.toString()}';
+    }
+
+    clear() {
+      this.currentOperand = "";
+      this.previousOperand = "";
       this.operation = undefined;
     }
 
-    updateDisplay(){
-      this.previousOperandtextElement = this.previousOperand;
-      this.currentOperandtextElement = this.currentOperand;
+    updateDisplay() {
+      this.previousOperandTextElement.innerText = this.previousOperand;
+      this.currentOperandTextElement.innerText = this.currentOperand;
     }   
 }
 
-const calculador = new Calculador( previousOperandtextElement,
-currentOperandTextElement
+const calculator = new Calculator( 
+   previousOperandTextElement,
+   currentOperandTextElement
 );
 
-allClearButton.addEvenListener("click", () => {
-  calculator.clear();
-  calculador.updateDisplay();  
+for (const numberButton of numberButtons) {
+   numberButton.addEventListener("click", () => {
+   calculator.appendNumber(numberButton.innerText);
+   calculator.updateDisplay();
+  });
+}
 
+allClearButton.addEventListener("click", () => {
+  calculator.clear();
+  calculator.updateDisplay();  
 });
+
+equalsButton.addEventListener("click", () => {
+  calculator.calculate();
+  calculator.updateDisplay();
+});
+
+deleteButton.addEventListener("click", () => {
+  calculator.delete();
+  calculator.updateDisplay();
+});
+
+
 
 

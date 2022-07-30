@@ -48,12 +48,12 @@ body {
   word-break: break-all;
 }
 
-.grid-container > .output > .previous-operand{
+.grid-container > .output > .previous-operand {
   color: azure;
   font-size: 1.5rem;
 }
 
-.grid-container > .output > .previous-operand{
+.grid-container > .output > .current-operand{
   color: white;
   font-size: 2.5rem;
 }
