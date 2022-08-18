@@ -1,12 +1,12 @@
 * {
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   font-weight: bold;
   margin: 0;
-  padding: 0pt;
+  padding: 0;
 }
 
-body { 
+body {  
   background: linear-gradient(to right, #233329 ,#0f7b4a)
 }
 
@@ -26,6 +26,11 @@ body {
   outline: none;
   background-color: #111;
   color:white;
+}
+
+.grid-container > button:hover {
+  background-color: #eee ;
+  color: #111;
 }
 
 .grid-container > .operator {
@@ -53,7 +58,7 @@ body {
   font-size: 1.5rem;
 }
 
-.grid-container > .output > .current-operand{
+.grid-container > .output > .current-operand {
   color: white;
   font-size: 2.5rem;
 }
